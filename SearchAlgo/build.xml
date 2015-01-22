@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="searchalgo" default="jar" basedir=".">
+  <target name="javac" description="Compile java source to bytecode">
+    <mkdir dir="classes"/>
+    <javac srcdir="src/edu/upenn/cis455/" includes="**" encoding="utf-8" destdir="classes" nowarn="true"
+        debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+      <classpath>
+        <pathelement location="lib/json-simple-1.1.1.jar"/>
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="jar" depends="javac" description="Create a jar file">
+    <zip destfile="searchalgo.jar" basedir="classes"/>
+  </target>
+
+	
+  <target name="clean" description="Cleans this project">
+    <delete includeemptydirs="true" failonerror="false">
+      <fileset dir="classes"/>
+      <fileset dir="." includes="searchalgo.jar"/>
+    </delete>
+  </target>
+
+  <target name="maintainer-clean" description="Removes all generated files" depends="clean"/>
+
+</project>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="all" name="Create Runnable Jar for Project SearchEngine with libraries in sub-folder">
+	<property name="src.dir" location="src"/>
+	<property name="classes.dir" location="classes"/>
+	<property name="lib.dir" location="lib"/>
+	<property name="storage.dir" location="storage"/>
+	<property name="target.dir" location="target"/>
+	<property name="master.home.dir" location="${target.dir}/master"/>
+	<property name="node.home.dir" location="${target.dir}/node"/>
+	<property name="master.webinf.dir" location="${master.home.dir}/WEB-INF"/>
+	<property name="node.webinf.dir" location="${node.home.dir}/WEB-INF"/>
+
+	<target name="compile">
+		<mkdir dir="${classes.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" debug="on" deprecation="off" optimize="on" includeAntRuntime="no">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</javac>
+		<copy todir="${classes.dir}">
+			<fileset dir="${src.dir}" excludes="**/*.java"/>
+		</copy>
+	</target>
+
+	<target name="build-master-war" depends="compile">
+		<!-- Move classes directory -->
+		<move file="classes" todir="${master.webinf.dir}"/>
+		<!-- Move lib directory -->
+		<move todir="${master.webinf.dir}/lib">
+			<fileset dir="lib">
+				<include name="*.jar"/>
+				<exclude name="servlet-api.jar"/>
+			</fileset>
+		</move>
+		<!-- Move webpage files -->
+		<move todir="${master.home.dir}">
+			<fileset dir=".">
+				<include name="*.html"/>
+			</fileset>
+		</move>
+		<move file="custom" todir="${master.home.dir}"/>
+		<move file="public" todir="${master.home.dir}"/>
+
+		<jar destfile="master.war">
+			<fileset dir="${master.home.dir}"/>
+		</jar>
+
+		<!-- Move back -->
+		<move file="${master.webinf.dir}/classes" todir="."/>
+		<move file="${master.webinf.dir}/lib" todir="."/>
+		<move todir=".">
+			<fileset dir="${master.home.dir}">
+				<include name="*.html"/>
+			</fileset>
+		</move>
+		<move file="${master.home.dir}/custom" todir="."/>
+		<move file="${master.home.dir}/public" todir="."/>
+	</target>
+
+	<target name="build-node-war" depends="compile">
+		<!-- Move classes directory -->
+		<move file="classes" todir="${node.webinf.dir}"/>
+		<!-- Move lib directory -->
+		<move todir="${node.webinf.dir}/lib">
+			<fileset dir="lib">
+				<include name="*.jar"/>
+				<exclude name="servlet-api.jar"/>
+			</fileset>
+		</move>
+
+		<jar destfile="node.war">
+			<fileset dir="${node.home.dir}"/>
+		</jar>
+
+		<!-- Move back -->
+		<move file="${node.webinf.dir}/classes" todir="."/>
+		<move file="${node.webinf.dir}/lib" todir="."/>
+	</target>
+
+	<target name="all" depends="build-master-war,build-node-war"/>
+	
+	<target name="clean" description="Deletes all the compiled files">
+		<delete dir="${classes.dir}"/>
+		<delete file="master.war"/>
+		<delete file="node.war"/>
+	</target>
+</project>

@@ -1,0 +1,223 @@
+/* reset browser styles */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1.2;
+   height: 100%;
+ 	background-color: #E0F0FF;
+}
+ol { 
+  padding-left: 1.4em;
+  list-style: decimal;
+}
+ul {
+  padding-left: 1.4em;
+  list-style: square;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+} 
+/* end reset browser styles */
+
+body {
+  background-color: #E0F0FF;
+}
+ul {
+  font-family: 'Inconsolata', sans-serif;
+  list-style: none;
+  color: black;
+  font-size: .9em;
+}
+label {
+  font-family: 'Inconsolata', sans-serif;
+  color: black;
+  font-size: 1.2em;
+  margin-left: 15px;
+}
+input, select {
+   font: 1em Arial, sans-serif;
+   padding: 3px 6px;
+   margin: auto;
+}
+select {
+  width: 170px;
+}
+input {
+  width: 150px;
+}
+#header {
+  width: 1000px;
+  margin: auto;
+}
+#header h1 {
+  font-family: 'Inconsolata', sans-serif;
+  font-size: 17pt;
+  margin: 10px 0px 15px 35px;
+}
+#flights {
+  width: 320px;
+  margin: auto;
+}
+#search {
+  margin: auto;
+  width: 500px;
+  border: 3px solid #E6B800;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+#directionSelect, #flightNumText, #airlineSelect {
+  display: block;
+}
+
+.btnSubmit {
+  -moz-box-shadow:inset 0px 0px 1px 0px #bbdaf7;
+  -webkit-box-shadow:inset 0px 0px 1px 0px #bbdaf7;
+  box-shadow:inset 0px 0px 1px 0px #bbdaf7;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
+  background:-moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5');
+  background-color:#79bbff;
+  -webkit-border-top-left-radius:6px;
+  -moz-border-radius-topleft:6px;
+  border-top-left-radius:6px;
+  -webkit-border-top-right-radius:6px;
+  -moz-border-radius-topright:6px;
+  border-top-right-radius:6px;
+  -webkit-border-bottom-right-radius:6px;
+  -moz-border-radius-bottomright:6px;
+  border-bottom-right-radius:6px;
+  -webkit-border-bottom-left-radius:6px;
+  -moz-border-radius-bottomleft:6px;
+  border-bottom-left-radius:6px;
+  text-indent:0;
+  border:1px solid #84bbf3;
+  display:inline-block;
+  color:#ffffff;
+  font-family:Georgia;
+  font-size:15px;
+  font-weight:bold;
+  font-style:normal;
+  height:50px;
+  line-height:50px;
+  width:100px;
+  text-decoration:none;
+  text-align:center;
+  text-shadow:1px 1px 0px #528ecc;
+  margin: 15px 0 5px 15px;
+
+}
+.btnSubmit:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
+  background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff');
+  background-color:#378de5;
+}.btnSubmit:active {
+  position:relative;
+  top:1px;
+}
+.flight {
+  background-color: #FFFFFF;
+  padding: 6px 6px;
+  border: 2px solid #E6B800;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  
+}
+
+.flight .flightNumber {
+  font-weight: bold;
+  text-align: right;
+}
+
+.flight .airline {
+  color: #4B4B4B;
+  font-weight: bold;
+}
+
+.flight .direction {
+
+}
+
+.flight .flightType {
+
+}
+
+.flight .airport {
+
+}
+
+.flight .scheduledTime {
+
+}
+
+.flight .estTime {
+
+}
+
+.flight .estTimeEarly {
+  color: green;
+  font-weight: bold;
+}
+
+.flight .estTimeLate {
+  color: orange;
+  font-weight: bold;
+}
+
+.flight .gate {
+
+}
+
+.flight .statusOnTime {
+  color: green;
+  font-weight: bold;
+}
+
+.flight .statusDelayed {
+  color: orange;
+  font-weight: bold;
+}
+
+.flight .statusCanceled {
+  color: red;
+  font-weight: bold;
+}
+
+.flight .statusComplete {
+  color: blue;
+  font-weight: bold;
+}
+
+.flight .statusOther {
+  color: orange;
+  font-weight: bold;
+}
+
+.flight .terminal {
+
+}
+
+.flight .security {
+
+}
+
+.flight .garage {
+
+}
+
+.flight .septa {
+
+}

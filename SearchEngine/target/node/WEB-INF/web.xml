@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+     <display-name>Search Engine Node</display-name>
+     
+     <servlet>
+         <servlet-name>CrawlerNodeServlet</servlet-name>
+         <servlet-class>edu.upenn.cis455.servlets.CrawlerNodeServlet</servlet-class>
+         <init-param>
+           <param-name>storagedir</param-name>
+           <param-value>/home/ec2-user/storage/</param-value>
+         </init-param>
+         <init-param>
+           <param-name>master</param-name>
+           <param-value>ec2-54-84-174-93.compute-1.amazonaws.com</param-value>
+         </init-param>
+         <init-param>
+           <param-name>port</param-name>
+           <param-value>8080</param-value>
+         </init-param>
+         <load-on-startup/>
+     </servlet>
+
+     <servlet-mapping>
+         <servlet-name>CrawlerNodeServlet</servlet-name>
+         <url-pattern>/*</url-pattern>
+     </servlet-mapping>
+</web-app>

@@ -1,0 +1,37 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"><title>CIS455/555 Search Engine--Team 02</title><link rel="stylesheet" href="styles/vendor.css"><link rel="stylesheet" href="styles/main.css"><body ng-app="Newsme"><ion-tabs class="tabs-positive tabs-icon-only"><ion-tab title="Search" icon-on="ion-search" icon-off="ion-search" ng-controller="SearchController"><div class="bar bar-positive"><h1 class="title">News Search</h1></div><div class="bar bar-subheader item-input-inset"><label class="item-input-wrapper"><i class="icon ion-search placeholder-icon"></i><input type="text" ng-disabled="searchProperties.inProgress" placeholder="Search the Guardian" ui-keypress="{13:'fetchResults()'}" ng-model="searchProperties.searchQuery"></label><button class="button" ng-click="fetchResults()" ng-disabled="searchProperties.inProgress"><i class="icon ion-ios7-paperplane placeholder-icon"></i> Go</button></div><ion-content class="has-subheader"><ion-list class="search-results-list item-text-wrap"><ion-item item-type="item item-thumbnail-left" ng-repeat="searchResult in searchResults" ng-click="showDetail(searchResult)"><img class="thumbnail" src="{{getThumbnail(''+searchResult.fields.thumbnail)}}"><p ng-bind-html="searchResult.webTitle"></p><!--p ng-bind-html="searchResult.fields.trailText"></p--><p ng-bind-html="searchResult.fields.byline" class="byline"></p></ion-item><ion-item class="ajax-loader" item-type="item" ng-show="searchProperties.inProgress && !searchProperties.errored"><img src="/images/ajax-loader.gif"></ion-item><ion-item class="no-results" item-type="item" ng-show="!searchProperties.inProgress && !searchProperties.errored && searchProperties.searchQuery !== '' && searchProperties.searched === true && searchResults.length <= 0"><p>No results found.</p></ion-item><ion-item ng-show="!searchProperties.inProgress && searchProperties.errored"><div class="card search-error"><div class="item item-text-wrap"><img class="alert-image" src="/images/alert.png"><h1>An error occured while trying to fetch your results.</h1><p>The Guardian API might be down, or there might be a problem with your internet connection.</p></div></div></ion-item><ion-item item-type="item" ng-show=" searchProperties.currentPage < searchProperties.totalPages && !searchProperties.inProgress && !searchProperties.errored" ng-click="fetchMoreResults()"><button class="button button-block button-balanced">Load More</button></ion-item></ion-list></ion-content></ion-tab><!--
+      <ion-tab title="Favorites" icon-on="ion-ios7-star" icon-off="ion-ios7-star-outline" badge="1" badge-style="badge-energized">
+        <ion-header-bar class="bar-positive">
+          <h1 class="title">Favorites</h1>
+        </ion-header-bar>
+        <ion-content>
+          <ion-list>
+            <a href="#" class="item item-body">
+              <img src="http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/4/2/1396458300892/a523a838-2617-41d2-86a1-68f2e8693231-140x84.jpeg">
+              <h2>Scandal and House of Cards win Peabody awards in record year</h2>
+              <p>Two programs about NFL concussions also win prestigious awards, which are given for excellence in television, radio and the internet</p>
+              <p class="byline">
+                Associated Press in Athens, Georgia
+              </p>
+            </a>
+          </ion-list>
+        </ion-content>
+      </ion-tab>
+
+      <ion-tab title="Alerts" icon-on="ion-alert" icon-off="ion-alert" badge="4" badge-style="badge-assertive">
+        <ion-header-bar class="bar-positive">
+          <h1 class="title">Alerts</h1>
+        </ion-header-bar>
+        <ion-content>
+          <ion-list>
+            <a href="#" class="item item-body">
+              <img src="http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2014/4/2/1396458300892/a523a838-2617-41d2-86a1-68f2e8693231-140x84.jpeg">
+              <h2>Scandal and House of Cards win Peabody awards in record year</h2>
+              <p>Two programs about NFL concussions also win prestigious awards, which are given for excellence in television, radio and the internet</p>
+              <p class="byline">
+                Associated Press in Athens, Georgia
+              </p>
+            </a>
+          </ion-list>
+        </ion-content>
+      </ion-tab>
+      --><ion-tab title="" icon-on="" icon-off=""><ion-header-bar class=""><h1 class=""></h1></ion-header-bar><ion-content><div class=""><div class=""></div><div class=""></div></div><div class=""><div class=""></div> </div><div class=""><div class=""></div> </div></ion-content></ion-tab></ion-tabs><script src="scripts/vendor.js"></script><script src="scripts/scripts.js"></script><!-- cordova script (this will be a 404 during development) --><script src="cordova.js"></script>

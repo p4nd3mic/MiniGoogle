@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="wordcount" default="jar" basedir=".">
+  <path id="project.class.path">
+    <pathelement location="libs/hadoop-core-1.0.3.jar"/>
+  </path>
+
+	
+  <target name="javac" description="Compile java source to bytecode">
+    <mkdir dir="classes"/>
+    <javac srcdir="src/edu/upenn/cis455/wordcount" includes="**" encoding="utf-8" destdir="classes" nowarn="true"
+        debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+      <classpath refid="project.class.path"/>
+    </javac>
+  </target>
+
+  <target name="jar" depends="javac" description="Create a JAR file">
+    <zip destfile="wordcount.jar" basedir="classes"/>
+  </target>
+
+  <target name="clean" description="Cleans this project">
+    <delete includeemptydirs="true" failonerror="false">
+      <fileset dir="classes"/>
+      <fileset dir="." includes="wordcount.jar"/>
+      <fileset dir="." includes="submit-hw*.zip"/>
+    </delete>
+  </target>
+
+</project>

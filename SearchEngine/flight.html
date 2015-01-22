@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>CIS455/555 Search Engine--Team 02</title>
+
+    <meta charset="utf-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    
+    <!-- Bootstrap --> 
+    <link href="public/dist/css/bootstrap.css" rel="stylesheet">
+	<link href="public/dist/css/bootstrap.min.css" rel="stylesheet" media="screen"> 
+	
+    <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="custom/flight/css/styles.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="custom/flight/js/flightSearch.js"></script> 
+    
+    <!--<script src="public/assets/js/jquery.js"></script>-->
+    <script src="public/assets/js/script.js"></script>
+    <script src="public/dist/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript"> 
+   
+   function change(){
+   	 	var s= document.getElementById("specialSearch");
+   	 	document.getElementById("searchLabelID").innerHTML = s.options[s.selectedIndex].text;
+   	 	document.getElementById("searchLabelID").style.color="blue";
+   }
+   
+    </script>
+    
+<script type="text/javascript">
+$(document).ready(function() {
+    $("input#STextID").autocomplete({
+        width: 300,
+        max: 10,
+        delay: 30,
+        minLength: 1,
+        autoFocus: true,
+        cacheLength: 1,
+        scroll: true,
+        highlight: false,
+        source: function(request, response) {
+            $.ajax({
+                url: "spellcheck",
+                dataType: "json",
+                data: request,
+                success: function( data, textStatus, jqXHR) {
+                    console.log( data);
+                    var items = data;
+                    response(items);
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                     console.log( textStatus);
+                }
+            });
+        }
+ 
+    });
+});
+</script>
+
+</head>
+
+<body>
+<div class="container"> 	
+ <a class="navbar-brand" href="index.html"><font size="15px" color="black"><B>GOgoGO </font></B></a>
+ <form class="navbar-form navbar-right"  action="result">
+          	
+          	<div class="form-group">
+          		<label class="label label-warning" height="200px" type="text" id="searchLabelID" name="searchLabel"> <font color="blue">DOCUMENT</font></label>
+          	</div>
+            <div class="form-group">
+              <input type="text" ID="STextID" width="600px" name="searchText" />
+            </div>
+            
+            <div class="form-group">
+            	<select id="specialSearch" onchange="change();" name="specialSearch">
+            			<option value="0" selected="selected">DOCUMENT</option>
+            			<option value="1">IMAGE</option>
+            			<option value="2">VIDEO</option>
+          	  			</select>
+            </div>
+            <button type="submit" class="btn btn-success" ID="SButtonID" >GO</button>
+          </form>
+</div> 
+
+<div class="container">  
+<P></P><P></P><P></P><P></P>    
+  <div id="header">
+    <h1 align="middle"><B>Search Flights departing or arriving Philadelphia</B></h1>
+  </div>
+	<div id="flights"></div>
+  <div id="search">
+    <form name="searchForm" action="">
+      <label>Direction: </label><select id="directionSelect">
+        <option value="Departure">Departure</option>
+        <option value="Arrival">Arrival</option>
+      </select>
+      <label>Flight Number: </label><input type="text" id="flightNumText">
+      <label>Airline: </label><select id="airlineSelect">
+        <option value=""></option>
+        <option value="AS">Alaska Airlines</option>
+        <option value="AC">Air Canada</option>
+        <option value="QK">Air Canada Jazz</option>
+        <option value="FL">AirTran Airways</option>
+        <option value="AA">American Airlines</option>
+        <option value="BA">British Airways</option>
+        <option value="DL">Delta Air Lines</option>
+        <option value="F9">Frontier Airlines</option>
+        <option value="LH">Lufthansa Airlines</option>
+        <option value="WN">Southwest Airlines</option>
+        <option value="NK">Spirit Airlines</option>
+        <option value="UA">United</option>
+        <option value="US">US Airways</option>
+        <option value="VX">Virgin America</option>
+      </select>
+         <P align="middle"><input type="button" class="btnSubmit" value="Search" /></P>
+    </form>
+  </div>
+  </div>
+</body>
+</html>

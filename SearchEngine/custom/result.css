@@ -1,0 +1,11 @@
+body {
+	padding-top: 50px;
+  	padding-bottom: 20px;
+	height: 100%;
+	
+}
+
+.navbar navbar-inverse navbar-fixed-top.container.navbar-collapse collapse.navbar-form navbar-right{
+	height: 180px;
+	
+}

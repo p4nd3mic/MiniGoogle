@@ -1,0 +1,599 @@
+
+*::-webkit-scrollbar {
+    /*-webkit-appearance: none;*/
+    visibility:hidden;
+    width:10px;
+}
+
+
+/* * * Variables * * */
+.bs-container {
+/* Colors */
+@textDark : #333333;
+@textMedium : #666666;
+@textLight : #999999;
+@textSelectedDark : #ffffff;
+@textSelectedMedium : @textSelectedDark;
+@textSelectedLight : #e1f1ff;
+@listBackground : #f7f7f7;
+@listSelectedBackground : #6fbafb;
+@imageBoxShadow : rgba(0,0,0,.13);
+@imageBoxBorder : #dedede;
+@imageBoxSelectedBorder : #61a2db;
+
+
+
+
+
+/* * * Functions * * */
+
+.box-shadow (@horiz, @vert, @blur, @color, @spread:0px) {
+	-webkit-box-shadow: @horiz @vert @blur @spread @color;
+	-moz-box-shadow: @horiz @vert @blur @spread @color;
+	box-shadow: @horiz @vert @blur @spread @color;
+}
+
+.box-shadow-inset (@horiz, @vert, @blur, @color, @spread:0px) {
+	-webkit-box-shadow:inset @horiz @vert @blur @spread @color;
+	-moz-box-shadow:inset @horiz @vert @blur @spread @color;
+	box-shadow:inset @horiz @vert @blur @spread @color;
+}
+
+.absolute(@top, @right, @bottom, @left) {
+	position:absolute;
+	top:@top;
+	right:@right;
+	bottom:@bottom;
+	left:@left;
+}
+
+.gradient-horiz(@leftColor, @rightColor) {
+	background: -moz-linear-gradient(left, @leftColor 0%, @rightColor 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%, @leftColor), color-stop(100%, @rightColor)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, @leftColor 0%,@rightColor 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, @leftColor 0%,@rightColor 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, @leftColor 0%,@rightColor 100%); /* IE10+ */
+	background: linear-gradient(left, @leftColor 0%,@rightColor 100%); /* W3C */
+        
+        @left: argb(@leftColor);
+        @right: argb(@rightColor);
+	
+	filter: ~"progid:DXImageTransform.Microsoft.gradient( startColorstr=@{left}, endColorstr=@{right},GradientType=1 )";  /*IE6-9 */
+	
+}
+
+.argb(@color) {
+    
+    
+}
+
+.border-radius(@tl, @tr, @bl, @br) {
+	-moz-border-radius-topleft: @tl;
+	-moz-border-radius-topright: @tr;
+	-moz-border-radius-bottomright: @br;
+	-moz-border-radius-bottomleft: @bl;
+	-webkit-border-radius: @tl @tr @bl @br;
+	border-radius: @tl @tr @bl @br;
+}
+
+.opacity(@opacity) {
+        @ie: @opacity * 100;
+	-moz-opacity: @opacity;
+	-khtml-opacity: @opacity;
+	opacity: @opacity;
+	/*-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=(@opacity*100));
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=(@opacity*100));*/
+        filter: ~"alpha(opacity=@{ie})";
+}
+
+
+
+
+font-family: Arial, sans-serif;
+
+
+/* * * Generic Styles * * */
+.bs-list {
+	.absolute(0,0,0,0);
+	overflow:hidden;
+	overflow-y:scroll;
+	
+	.bs-list_item {
+		cursor:pointer;
+		
+		border-bottom:1px solid #e8e8e8;
+		padding:10px 10px 0px 10px;
+		position:relative;
+		
+		.bs-list_item_fade {
+			position:absolute;
+			top:0;
+			right:10px;
+			height:100%;
+			width:15px;
+			.gradient-horiz(rgba(247, 247, 247, 0), rgba(247, 247, 247, 1))
+		}
+		
+		
+		.bs-list_text_dark {
+			color:@textDark;
+		}
+		
+		.bs-list_text_medium {
+			color:@textMedium;
+		}
+		
+		.bs-list_text_light {
+			color:@textLight;
+		}
+	}
+	
+	.bs-list_item.bs-selected {
+		cursor:default;
+		background:@listSelectedBackground;
+		
+		.bs-list_item_fade {
+			.gradient-horiz(rgba(111, 186, 251, 0), rgba(111, 186, 251, 1))
+		}
+		
+		
+		.bs-list_text_dark {
+			color:@textSelectedDark;
+		}
+		
+		.bs-list_text_medium {
+			color:@textSelectedMedium;
+		}
+		
+		.bs-list_text_light {
+			color:@textSelectedLight;
+		}
+	}
+	
+	
+	
+}
+
+.bs-scroll_bar_parent {
+	.absolute(0,0,0,0);
+	overflow-y:scroll;
+        overflow-x:hidden;
+}
+
+.bs-scroll_bar_gutter {
+	position:absolute;
+	top:10px;
+	right:6px;
+	bottom:10px;
+	width:10px;
+}
+
+.bs-scroll_bar_handle {
+	position:absolute;
+	width:100%;
+	background:#000000;
+	.opacity(.3);
+	.border-radius(5px, 5px, 5px, 5px);
+	
+}
+
+.bs-empty_indicator {
+	text-align: center;
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	color:@textMedium;
+	text-shadow: 0px 1px 0px #fff;
+}
+
+.bs-two_column_view {
+	.absolute(0,0,0,0);
+	overflow:hidden;
+	
+}
+
+.bs-two_column_view_shifter {
+	position:absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	width:100%;
+}
+
+.bs-two_column_view_column {
+	.absolute(0,0,0,0);
+	overflow:hidden;
+}
+
+.bs-two_column_view_switch_button {
+	position:absolute;
+	bottom:0;
+	height:50px;
+	text-align:center;
+	color:@textMedium;
+	font-weight:bold;
+	font-size:20px;
+	background:#f1f1f1;
+	border-top:1px solid #999999;
+	left:0;
+	right:0;
+	line-height:50px;
+	vertical-align: middle;
+	display:none;
+}
+
+
+#bookSearchJS {
+	font-family:Arial, sans-serif;
+}
+
+
+
+#bs-results {
+	
+	position:absolute;
+	top:70px;
+	left:0;
+	bottom:0;
+	right:0;
+	
+}
+
+.bs-list_books {
+	.absolute(0,0,0,0);
+	
+	background:#f7f7f7;
+}
+
+.bs-list.bs-loading {
+	.bs-empty_indicator {
+                color:transparent;
+                height:32px;
+		background:url(../img/loader-list-empty.gif) no-repeat center center;
+		text-shadow:none;
+	}
+	
+	.bs-list_load_more {
+		color:transparent;
+		background:url(../img/loader-list-empty.gif) no-repeat center center;
+		cursor:default;
+		
+	}
+
+}
+.bs-list {
+	
+	.bs-list_load_more {
+		cursor:pointer;
+		text-align:center;
+		height:60px;
+		line-height:60px;
+		font-weight:bold;
+		color:@textMedium;
+	}
+
+	
+
+	
+	
+	.bs-list_book_item {
+		height:82px;
+		padding-right:15px;
+		
+		.bs-list_item_fade {
+			right:15px;
+		}
+	
+		
+		
+	}
+
+	
+	.bs-list_book_item_title, .bs-list_book_item_meta_text {
+
+		overflow:hidden;
+		white-space: nowrap;
+		padding-left:10px;
+	}
+
+	.bs-list_book_item_title {
+		
+		font-size:18px;
+		line-height:22px;
+		font-weight:bold;
+	}
+
+	.bs-list_book_item_meta_text {
+		line-height:18px;
+		font-size:14px;
+
+		span {
+			width:60px;
+			
+			display:inline-block;
+		}
+	}
+
+}
+
+.bs-book_img, .bs-list_offer_item_image {
+
+	background-color:#fff;
+	background-repeat:no-repeat;
+	background-position:center center;
+	.box-shadow(0px, 2px, 5px, rgba(0,0,0,.13);
+	border:1px solid #dedede;
+	border:1px solid rgba(0,0,0,.13);
+}
+
+.bs-list_offer_item_image {
+	width:140px;
+	height:50px;
+}
+
+.bs-book_img_small {
+	width:70px;
+	height:70px;
+}
+
+.bs-book_img_large {
+	width:136px;
+	height:136px;
+}
+
+.bs-list {
+	.bs-book_img {
+		float:left;	
+	}
+	
+	.bs-selected {
+		.bs-book_img, .bs-list_offer_item_image {
+			border:1px solid #61a2db;
+	
+			
+		}
+        
+        
+		.bs-list_book_item_title, .bs-list_book_item_meta_text {
+			color:#fff;
+		}
+		
+		
+		.bs-list_book_item_meta_text span {
+			
+			color:#e1f1ff;
+		
+		}
+	}
+}
+
+
+#bs-book {
+	position:absolute;
+	top:70px;
+	right:0;
+	bottom:0;
+	left:40%;
+	padding-left:30px;
+	min-width:400px;
+}
+
+.bs-tab_view {
+	.absolute(0,0,0,0);
+	/*position:absolute;
+	top:0;
+	bottom:0;
+	left:30px;
+	right:0;*/
+	
+	.bs-tab_content_container {
+		position:absolute;
+		top:44px;
+		bottom:0;
+		left:0;
+		right:0;
+	}
+	
+	.bs-tab_well {
+		border-bottom:2px solid #6e6e6e;
+		height:34px;
+        margin-top:8px;
+	}
+	
+	.bs-tab_button {
+		cursor:pointer;
+		padding:2px 13px;
+		color:#666666;
+		font-size:20px;
+		line-height:30px;
+		vertical-align: middle;
+		font-weight:bold;
+		float:left;
+		height:30px;
+		border-bottom:2px solid #48a2ff;
+		
+	}
+	
+	.bs-tab_container {
+		overflow-y:scroll;
+	}
+	
+	.bs-tab_button:hover {
+		background:#f4f4f4;
+	}
+	
+	.bs-tab_button.bs-selected {
+		
+		padding-bottom:0px;
+
+		border-bottom-width: 4px;
+	}
+	
+	
+	.bs-tab_content {
+		
+		display:none;
+		position:absolute;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+	}
+	
+	.bs-tab_content.bs-selected {
+		display:block;
+	}
+	
+}
+
+/* Book Details */
+
+.bs-book_details {
+	height:100%;
+	position:relative;
+	overflow:hidden;
+	overflow-y:scroll;
+	
+	.bs-book_img {
+		position:absolute;
+		top:14px;
+		left:15px;
+		z-index:1;
+	}
+	
+}
+
+
+.bs-book_details_image_well {
+	z-index:0;
+	width:166px;
+	position:fixed;
+	height:100%;
+	background:#ededed;
+	
+	
+}
+
+
+
+.bs-book_details_data {
+
+	
+	padding:15px;
+	padding-left:181px;
+}
+
+.bs-book_details_title {
+	font-size:22px;
+	font-weight:bold;
+	color:#333333;
+	padding-bottom:20px;
+}
+
+.bs-book_details_row {
+	font-size:18px;
+	padding-bottom:12px;
+	overflow:auto;
+	
+	.bs-book_details_label {
+		color:#999999;
+		float:left;
+	}
+	
+	.bs-book_details_text {
+		color:#666666;
+		margin-left:100px;
+	}
+}
+
+.bs-list {
+	.bs-list_offer_item {
+		padding-right:20px;
+		height:62px;
+
+		.bs-list_offer_item_price {
+			padding:4px 0 10px;
+			text-align:right;
+			color:#333333;
+		}
+
+		.bs-list_offer_item_shipping {
+			text-align:right;
+			color:#666666;
+		}
+
+		.bs-list_offer_item_image {
+			float:left;
+		}
+	}
+}
+
+.bs-keyword_input {
+	.absolute(0,0,0,0);
+}
+
+.bs-keyword_input_form {
+	.absolute(0,0,0,0);
+	max-width : 650px; 
+	
+}
+
+.bs-keyword_input_text_field_wrapper { 
+	position:absolute;
+	top:13px;
+	left:10px;
+	right:98px;
+    padding:4px;	
+    border:1px solid #c7c7c7; 
+	.box-shadow-inset(0, 1px, 0px, #efefef);
+    background:#fff;
+}
+
+.bs-keyword_input_text_field {
+	outline:none;
+	width:100%;
+	height:25px;
+	color:@textDark;
+	font-size:18px;
+    padding:0;
+    border:none;
+}
+
+.bs-keyword_input_text_field.bs-empty {
+	color:@textLight;
+}
+
+.bs-keyword_input_submit {
+	position:absolute;
+	top:13px;
+	right:10px;
+	width:75px;
+	height:35px;
+	font-size:18px;
+	padding-top:2px;
+	border:1px solid #2f89d8;
+	background:#3c9aeb;
+	color:#fff;
+	.border-radius(4px, 4px, 4px, 4px);
+}
+
+.bs-keyword_input_submit:active {
+  .box-shadow-inset(0px, 1px, 5px, rgba(0,0,0,.2));
+}
+
+#bs-topRow {
+	height:60px;
+	/*border-bottom:1px solid #a1a1a1;*/
+    .box-shadow(0, 1px, 2px, rgba(0,0,0,.24));
+	background:#ebebeb;
+}
+
+#bs-bottomRow {
+	top:60px;
+	/*.absolute(70px,0,0,0);*/
+}
+}
+
+
+
+

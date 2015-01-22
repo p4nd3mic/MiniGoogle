@@ -1,0 +1,307 @@
+
+<html lang="en">
+  
+  <head>
+    
+    <title>
+      CIS455/555 Search Engine--Team 02
+    </title>
+    <meta charset="utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <!-- Bootstrap -->
+    
+    <link href="public/dist/css/bootstrap.css" rel="stylesheet">
+	<link href="public/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    
+	
+    <!-- Custom styles for this template -->
+    <link href="custom/index.css" rel="stylesheet">
+    
+    
+    <!--
+<script src="public/assets/js/jquery.js"></script>
+-->
+    <script src="public/assets/js/script.js">
+    </script>
+    <script src="public/dist/js/bootstrap.min.js">
+    </script>
+    
+    <script type="text/javascript"> 
+      
+      function ChooseLocPriority(){
+   		var loctextbox=document.getElementById("LocPrio");
+        var button=document.getElementById("locPrioButton");
+        if(loctextbox.value == '0'){
+          loctextbox.value='1';
+          button.value = 'Remove Location Priority Search';
+        }
+        else{
+          loctextbox.value='0';
+          button.value = 'Location Priority Search';
+        }
+      }
+      
+      function showCity(){
+   		var citytextbox=document.getElementById("cityNameID");
+        var button=document.getElementById("cityButtonID");
+        if(citytextbox.style.visibility == 'hidden'){
+          citytextbox.style.visibility = 'visible';
+          button.value = 'Hide your location';
+        }
+        else{
+          citytextbox.style.visibility = 'hidden';
+          button.value = 'change your location';
+        }
+      }
+      
+      function change(){
+   	 	var s= document.getElementById("specialSearch");
+        document.getElementById("searchLabelID").innerHTML = s.options[s.selectedIndex].text;
+        document.getElementById("searchLabelID").style.color="blue";
+        document.getElementById("msgid").style.size="10pt";
+      }
+      
+      
+    </script>
+    
+    
+    <script src="http://code.jquery.com/jquery-1.7.js"
+    type="text/javascript">
+    </script>
+	<script
+    src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"
+    type="text/javascript">
+    </script>
+	<link
+    href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
+    rel="stylesheet" type="text/css" />
+    
+    
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("input#STextID").autocomplete({
+          width: 300,
+          max: 10,
+          delay: 30,
+          minLength: 1,
+          autoFocus: true,
+          cacheLength: 1,
+          scroll: true,
+          highlight: false,
+          source: function(request, response) {
+            $.ajax({
+              url: "spellcheck",
+              dataType: "json",
+              data: request,
+              success: function( data, textStatus, jqXHR) {
+                console.log( data);
+                var items = data;
+                response(items);
+              }
+              ,
+              error: function(jqXHR, textStatus, errorThrown){
+                console.log( textStatus);
+              }
+            }
+                  );
+          }
+          
+        }
+                                       );
+      }
+                       );
+      
+    </script>
+    
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false">
+    </script>
+    
+    <script type="text/javascript"> 
+      var geocoder;
+      
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+      }
+      
+      //Get the latitude and the longitude;
+      function successFunction(position) {
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+        codeLatLng(lat, lng)
+      }
+      
+      function errorFunction(){
+        alert("Failed to locate geo-position.\n Please click change city button and enter your place.");
+      }
+      
+      function initialize() {
+        geocoder = new google.maps.Geocoder();
+      }
+      
+      function codeLatLng(lat, lng) {
+        
+        var latlng = new google.maps.LatLng(lat, lng);
+        geocoder.geocode({'latLng': latlng}
+                         , function(results, status) {
+                           if (status == google.maps.GeocoderStatus.OK) {
+                             console.log(results)
+                               if (results[1]) {
+                                 
+                                 for (var i=0; i<results[0].address_components.length; i++) {
+                                   for (var b=0;b<results[0].address_components[i].types.length;b++) {
+                                     
+                                     if (results[0].address_components[i].types[b] == "locality") {
+                                       
+                                       city= results[0].address_components[i];
+                                       break;
+                                     }
+                                   }
+                                 }
+                                 //city data
+                                 document.getElementById("cityNameID").value=city.long_name;
+                               }
+                             else {
+                               alert("No geo-results found\n. Please click change city button and enter your place.");
+                             }
+                           }
+                           else {
+                             alert("Geocoder failed due to: " + status+"\n"+"Please click change city button and enter your place.");
+                           }
+                         }
+                        );
+      }
+    </script>
+    
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    
+    <!--[if lt IE 9]>
+
+<script src="public/assets/js/html5shiv.js"></script>
+
+<script src="public/assets/js/respond.min.js"></script>
+
+<![endif]-->
+    
+    
+  </head>
+  
+  
+  <body onload="initialize()">
+   
+    <div class="container">
+    <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="Ebay.html" target="_blank"><font color="black">Ebay</font></a></li>
+                <li><a href="/custom/WorldWeather/weather.html" target="_blank"><font color="black">Weather</font></a></li>
+                <li><a href="custom/Book/src/index.html" target="_blank"><font color="black">Book</font></a></li>
+               	<li><a href="flight.html" target="_blank"><font color="black">Flight</font></a></li>
+                <li><a href="custom/Events/index.html" target="_blank"><font color="black">Events</font></a></li>
+                <li><a href="custom/movie/Index.html" target="_blank"><font color="black">Movie</font></a></li>
+                <li><a href="custom/translate/translate.html" target="_blank"><font color="black">Translation</font></a></li>
+                <li><a href="custom/News/www/index.html" target="_blank"><font color="black">News</font></a></li>
+                <li><a href="maps.html" target="_blank"><font color="black">Map</font></a></li>
+              </ul>
+            </div>
+    </div>
+    
+    <div class="container">
+      <h2 class="searching-heading" align="middle">
+        <B>
+          GOgoGO
+        </B>
+      </h2>
+     <!--</div>-->
+     
+      
+      
+          <form name="searchForm" align="middle" class="form-search" action="result">
+            <div class="btn-group btn-group-justified">
+  <div class="btn-group">
+    <input type="button" id="locPrioButton" onclick="ChooseLocPriority();" value="Location Priority Search" />
+  </div>
+  <div class="btn-group">
+    <input type="button" id="cityButtonID" onclick="showCity();" value="change your location" />
+  </div>
+  <div class="btn-group">
+    <input type="text" width="50px" id="cityNameID" name="cityName" style="visibility:hidden" value="Philadelphia" autofocus >
+  </div>
+  <div class="btn-group">
+    <input type="text" width="50px" id="LocPrio" name="LocPrioValue" style="visibility:hidden" value="0" autofocus >
+  </div>
+  
+</div>
+
+<P></P><P></P><P></P>
+         <P align="middle">
+         <input  type="text" id="STextID" name="searchText" style="border:3px ridge #223122;"  x-webkit-speech="x-webkit-speech" />
+         </P>
+         <P></P>
+         <P></P>
+         <P></P><P></P><P></P>
+         <div class="btn-group btn-group-justified">
+  <div class="btn-group" align="right">
+    <label  type="text" id="searchLabelID" name="searchLabel">
+                <font color="blue">
+                  DOCUMENT 
+                </font>
+              </label>
+  </div>
+  <div class="btn-group">
+    <select class="selectpicker bla bla bli" font-size="9" id="specialSearch" onchange="change();" name="specialSearch">
+                <option value="0" selected="selected">
+                  DOCUMENT
+                </option>
+                <option value="1">
+                  IMAGE
+                </option>
+                <option value="2">
+                  VIDEO
+                </option>
+              </select>
+  </div>
+  </div>
+          
+         <P></P><P></P><P></P>    
+            <P align="middle">
+              <button type="submit" class="btn btn-lg btn-primary btn-block" align="middle" ID="SButtonID" >
+                <font color="black">
+                  <B>
+                    G          O  
+                  </B>
+                </font>
+              </button>
+            </P>
+          </form>
+        
+        </div>
+        <!-- /.container -->
+        
+        <script type="text/javascript">
+          if (document.createElement("input").webkitSpeech === undefined) {
+            alert("Speech input is not supported in your browser.");
+          }
+        </script>
+        
+        <footer>
+            <p class="pull-right">
+              <a href="index.html">
+                Back to top &middot;
+              </a>
+            </p>
+            <p>
+              &copy; CIS455/555 --Team 02 &middot; 
+              <a href="http://www.cis.upenn.edu/~cis455/" target="_blank">
+                Class Page &middot;
+              </a>
+            </p>
+          </footer>
+          
+      </body>
+      
+    </html>
+    
+    

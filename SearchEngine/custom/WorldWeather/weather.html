@@ -1,0 +1,150 @@
+<html>
+    <head>
+        <title>CIS455/555 Search Engine--Team 02</title>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+    	
+    	<!-- Custom styles for this template -->
+    <style type="text/css">body { height: 100%;
+ 	background-color: #E0F0FF;
+	} </style>
+    </head>
+    <body>
+   <script>
+function validateForm() {
+    var x=document.forms["myForm"]["q"].value;
+    console.log('query string=' + x);
+    if (x==null || x=="")
+        var error = "Empty query, Please enter a query.";
+    else if(/\d/.test(x)) {
+        var regUKPostcode = /^([a-zA-Z]){1}([0-9][0-9]|[0-9]|[a-zA-Z][0-9][a-zA-Z]|[a-zA-Z][0-9][0-9]|[a-zA-Z][0-9]){1}([ ])([0-9][a-zA-z][a-zA-z]){1}$/;
+        var regUSCANZipcode = /(^\d{5}(-\d{4})?$)|(^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$)/;
+        var regLatLong = /^(-?(90|(\d|[1-8]\d)(\.\d{1,6}){0,1}))\,{1}(-?(180|(\d|\d\d|1[0-7]\d)(\.\d{1,6}){0,1}))$/;
+        var validIP = function(ip) {
+            var values = ip.split('.');
+            if(values.length != 4) return false;
+
+            for(var v in values)
+                if(values[v] < 0 || values[v] > 255) return false;
+
+            return true;
+        };
+
+        if(validIP(x)) {
+            updateDom(x);
+            return false;
+        } else if(regUSCANZipcode.test(x)) {
+            updateDom(x);
+            return false;
+        } else if(regUKPostcode.test(x)) {
+            updateDom(x);
+            return false;
+        } else if(regLatLong.test(x)) {
+            updateDom(x);
+            return false;
+        } else
+            error = "Please enter an valid US/UK/Canada Postal Code or IP or (Lat,Long) query.";
+    } else {
+        updateDom(x);
+        return false;
+    }
+
+    document.getElementById('status').innerHTML = error;
+    return false;
+};
+
+function updateDom(q) {
+    getLocalWeather(q, function(result) {
+        document.getElementById('weatherData').innerHTML = result;
+        document.getElementById('status').innerHTML = "";
+    });
+
+    return false;
+}
+
+function errorView(error) {
+    document.getElementById('status').innerHTML = error;
+}
+
+function resultView(jsonres) {
+   var template = '<img src="<%= icon %>" alt="Weather Condition" />\
+     <div><b><%= location %></b> </div>\
+     <div style="color:#07CFFC"><b><%= date %></b> </div>\
+     <div style="color:#1707FC"> <b><%= weatherDesc %></b> </div>\
+     <div style="color:#FC071B"><b><%= temp %>\u2103</b></div>\
+     <div>\
+     <li>Location: <b><%= location %></b></li>\
+     <li>Date: <b><%= date %></b></li>\
+     <li>Weather Condition: <b><%= weatherDesc %></b></li>\
+     <li>Temperature: <b><%= temp %>\u2103</b></li>\
+     <li>Max Temperature: <b><%= tempMaxC %>\u2103</b></li>\
+     <li>Min Temperature: <b><%= tempMinC %>\u2103</b></li>\
+     <li>Cloud Cover: <b><%= cloudcover %></b></li>\
+     <li>Humidity: <b><%= humidity %></b></li>\
+     <li>Observation Time: <b><%= observation_time %></b></li>\
+     <li>Precipitation: <b><%= precipMM %>MM</b></li>\
+     <li>Pressure: <b><%= pressure %></b></li>\
+     <li>Visibility: <b><%= visibility %></b></li>\
+     <li>Wind Direction 16Point: <b><%= winddir16Point %></b></li>\
+     <li>Wind Direction Degree: <b><%= winddirDegree %></b></li>\
+     <li>Wind Speed: <b><%= windspeed %>Kmph</b></li>\
+     </div>';
+
+    var vars = 
+    {
+        location: jsonres.data.request[0].query,
+        date: jsonres.data.weather[0].date,
+        temp: jsonres.data.current_condition[0].temp_C,
+        weatherDesc: jsonres.data.current_condition[0].weatherDesc[0].value,
+        tempMaxC: jsonres.data.weather[0].tempMaxC,
+        tempMinC: jsonres.data.weather[0].tempMinC,
+        cloudcover: jsonres.data.current_condition[0].cloudcover,
+        humidity: jsonres.data.current_condition[0].humidity,
+        observation_time: jsonres.data.current_condition[0].observation_time,
+        precipMM: jsonres.data.current_condition[0].precipMM,
+        pressure: jsonres.data.current_condition[0].pressure,
+        visibility: jsonres.data.current_condition[0].visibility,
+        winddir16Point: jsonres.data.weather[0].winddir16Point,
+        winddirDegree: jsonres.data.weather[0].winddirDegree,
+        windspeed: jsonres.data.weather[0].windspeedKmph,
+        icon: jsonres.data.current_condition[0].weatherIconUrl[0].value,
+    };
+
+        return _.template(template, vars);
+}
+
+function getLocalWeather(q, onResult) {
+  var baseurl = "http://api.worldweatheronline.com/free/v1/weather.ashx";
+
+  //JSONP call
+  //Please note that 'key' here is only for demo purpose. You should replace
+  //it with your own key which can be obtained from registering on WWO website.
+  //Also you should put the key on server side on your own domain and get
+  //it using Ajax call when loading the parent html file, rather than put here
+  //at client side that everyone can see.
+  $.getJSON(baseurl + '?callback=?', {
+    q: q,
+    num_of_days: '1',
+    format: 'json',
+    key: 'xkq544hkar4m69qujdgujn7w'
+  })
+  .done(function( jsonres ) {
+      console.log('getJSON'+JSON.stringify(jsonres));
+      if(jsonres.data.hasOwnProperty('error'))
+          errorView(jsonres.data.error[0].msg); 
+      else onResult(resultView(jsonres));
+  })
+  .fail(function( jqxhr, textStatus, error ) {
+        var err = textStatus + ', ' + error;
+          errorView("Request Failed: " + err);
+  });
+}
+</script>
+   <P align="middle"><h1>Search World Weather</h1></P>
+   <form name="myForm" onsubmit="return validateForm()">
+   City or town name; IP address; US or Canada Postal Code or US Zipcode; (Latitude,longitude): <input type="text" name="q">
+   <input type="submit" value="Submit">
+   </form>
+   <div style="color:#B20528"><span id="status"></span></div>
+   <div id="weatherData"></div>
+</body></html>

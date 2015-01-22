@@ -1,0 +1,8 @@
+node_modules
+.tmp
+.sass-cache
+.DS_Store
+app/bower_components
+coverage
+platforms
+plugins

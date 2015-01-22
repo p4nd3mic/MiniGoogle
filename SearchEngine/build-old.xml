@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="pack" name="Create Runnable Jar for Project SearchEngine with libraries in sub-folder">
+	<property name="src.dir" location="src"/>
+	<property name="classes.dir" location="classes"/>
+	<property name="lib.dir" location="lib"/>
+	<property name="storage.dir" location="storage"/>
+	<property name="target.dir" location="target"/>
+	<property name="master.home.dir" location="${target.dir}/master"/>
+	<property name="node.home.dir" location="${target.dir}/node"/>
+	<property name="master.webinf.dir" location="${master.home.dir}/WEB-INF"/>
+	<property name="node.webinf.dir" location="${node.home.dir}/WEB-INF"/>
+
+	<target name="compile">
+		<mkdir dir="${classes.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" debug="on" deprecation="off" optimize="on" includeAntRuntime="no">
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</javac>
+		<copy todir="${classes.dir}">
+			<fileset dir="${src.dir}" excludes="**/*.java"/>
+		</copy>
+	</target>
+
+	<target name="build-jar" depends="compile">
+		<jar destfile="search-engine.jar">
+			<manifest>
+				<attribute name="Class-Path" value=". WEB-INF/lib/servlet-api.jar WEB-INF/lib/log4j-1.2.17.jar WEB-INF/lib/je-5.0.103.jar WEB-INF/lib/jsoup-1.7.3.jar WEB-INF/lib/gson-2.2.4.jar WEB-INF/lib/json-simple-1.1.1.jar"/>
+			</manifest>
+			<fileset dir="${classes.dir}"/>
+		</jar>
+	</target>
+	
+	<target name="pack" depends="build-jar" description="Create an archive for deployment">
+		<!-- Move lib directory -->
+		<move file="lib" todir="${master.webinf.dir}"/>
+		<!-- Move webpage files -->
+		<move todir="${master.home.dir}">
+			<fileset dir=".">
+				<include name="*.html"/>
+				<include name="wordlist.txt"/>
+			</fileset>
+		</move>
+		<move file="custom" todir="${master.home.dir}"/>
+		<move file="public" todir="${master.home.dir}"/>
+
+		<zip destfile="deploy-master.zip">
+			<zipfileset dir="${target.dir}">
+				<include name="master/**/*.*"/>
+			</zipfileset>
+			<zipfileset file="search-engine.jar" fullpath="master/search-engine.jar"/>
+			<zipfileset file="start-master.sh"/>
+		</zip>
+		<!-- Moving back -->
+		<move file="${master.webinf.dir}/lib" todir="."/>
+		<move todir=".">
+			<fileset dir="${master.home.dir}">
+				<include name="*.html"/>
+				<include name="wordlist.txt"/>
+			</fileset>
+		</move>
+		<move file="${master.home.dir}/custom" todir="."/>
+		<move file="${master.home.dir}/public" todir="."/>
+		
+		<move file="lib" todir="${node.webinf.dir}"/>
+		<move file="US.txt" todir="${node.home.dir}"/>
+		<mkdir dir="${storage.dir}"/>
+		<zip destfile="deploy-node.zip">
+			<zipfileset dir="${target.dir}">
+				<include name="node/**/*.*"/>
+			</zipfileset>
+			<zipfileset file="search-engine.jar" fullpath="node/search-engine.jar"/>
+			<zipfileset dir="${storage.dir}" fullpath="storage"/>
+			<zipfileset file="start-node.sh"/>
+			<zipfileset file="repair.sh"/>
+		</zip>
+		<move file="${node.webinf.dir}/lib" todir="."/>
+		<move file="${node.home.dir}/US.txt" todir="."/>
+	</target>
+	
+	<target name="clean" description="Deletes all the compiled files">
+		<delete dir="${classes.dir}"/>
+		<delete dir="${storage.dir}"/>
+		<delete file="search-engine.jar"/>
+		<delete file="deploy-master.zip"/>
+		<delete file="deploy-node.zip"/>
+	</target>
+</project>

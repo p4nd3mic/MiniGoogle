@@ -1,0 +1,25 @@
+<project name="checker" default="jar" basedir="./">
+	
+  <target name="init">
+    <mkdir dir="WEB-INF/classes"/>
+  </target>
+ 
+  <target name="compile-check" depends="init">
+    <javac srcdir="src" destdir="WEB-INF/classes" includes="edu/upenn/cis455/spellchecker/*.java" deprecation="on"
+     debug="true" includeantruntime="false" classpath="WEB-INF/lib/servlet-api.jar; WEB-INF/lib/je-5.0.34.jar; WEB-INF/lib/json-simple-1.1.1.jar">
+       <compilerarg value="-Xlint"/>
+    </javac>
+  </target>
+  
+
+   <target name="jar" depends="compile-check" description="Create a jar file">
+	    <zip destfile="check.jar" basedir="WEB-INF/classes"/>
+	  </target>
+
+
+  <target name="clean">
+    <delete dir="WEB-INF/classes"/>
+    <delete file="check.jar"/>
+  </target>
+	
+</project>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Just a simple site for searching for films by either name or year and name." />
+<link rel="stylesheet" type="text/css" media="all" href="css/reset.css" />
+<link rel="stylesheet" type="text/css" media="all" href="css/text.css" />
+<link rel="stylesheet" type="text/css" media="all" href="css/960.css" />
+<link rel="stylesheet" type="text/css" media="all" href="css/Stylesheet.css" />
+<script type="text/javascript" src="scripts/JQuery.js"></script>
+<script type="text/javascript" src="scripts/mustache.js"></script>
+<script type="text/javascript" src="scripts/javascript.js"></script>
+<title>CIS455/555 Search Engine--Team 02</title>
+</head>
+<body>
+<div class="wrapper container_12" id="html_wrapper">
+	<div class="wrapper grid_12" id="header_wrapper">
+		<p align="right"><h3><a href="../../index.html"><B> GogoGo</B></a></h3></p>
+		<div class="grid_12 alpha">
+			<h1>Movie-Search</h1>
+			
+			<hr />
+		</div>
+	</div>
+	<div class="wrapper grid_12" id="body_wrapper">
+		<div class="wrapper grid_12" id="search_wrapper" style="margin-bottom:20px;">
+			<div class="grid_12 alpha" id="search_div">
+				<div class="grid_5 alpha" id="search_input">
+					<form action="" method="post" name="search_form" class="form" id="search_form" title="search_form" onSubmit="" onClick="">
+						<fieldset style="margin-bottom:0px; border:1px solid gray; padding:1em;">
+							<legend>
+							<h6>Search</h6>
+							</legend>
+							<table style="margin-bottom:0px; border:0px;">
+								<tbody>
+									<tr>
+										<td class="non_omega_table_elem" id="non_omega_table_elem_top1"><label for="title_input">Title:</label></td>
+										<td class="non_omega_table_elem" id="non_omega_table_elem_top2"><input type="text" name="title_input" id="title_input" /></td>
+										<td class="omega_table_elem"><!--description-->
+											Must be at least two characters
+										</td>
+									</tr>
+									<tr>
+										<td class="non_omega_table_elem" id="non_omega_table_elem_bottom1"><label for="year_input">Year:</label></td>
+										<td class="non_omega_table_elem" id="non_omega_table_elem_bottom2"><input type="text" name="year_input" id="year_input" /></td>
+										<td class="omega_table_elem"><!--description-->
+											Must be exactly four digits
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<input name="search_btn" type="submit" class="Btn" id="search_btn" title="search_btn" onClick="" />
+							<input name="reset_search" type="reset" class="Btn" id="reset_search" title="reset_search" onClick="" />
+						</fieldset>
+					</form>
+				</div>
+				<div class="removeInFinalVersion2 grid_5" id="search_resulthtml_div">
+					<p>ResultHTML</p>
+					<span id="search_resulthtml">Placeholder for "search_resulthtml"</span> </div>
+			</div>
+		</div>
+		<hr class="displayAfterSearch" style="display:none;" />
+		<div class="wrapper grid_12 alpha displayAfterSearch" id="result_wrapper" style="display:none;">
+			<div class="grid_12" id="results">
+				<div class="grid_12 alpha" id="search_results">
+					<h6><a name="result_anker">Results:</a></h6>
+					<table class="alpha">
+						<tbody>
+							<tr>
+								<td><table class="search_result_table grid_3 alpha" style="margin-bottom:0px;">
+										<thead>
+											<tr>
+												<th>Title</th>
+												<th>Year</th>
+												<th>Type</th>
+												<th>ImdbID</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="Title"><a href='#result_anker' class='title_link'>&nbsp;</a></td>
+												<td class="Year"></td>
+												<td class="Type"></td>
+												<td class="imdbID"></td>
+											</tr>
+											<tr>
+												<td class="Title"><a href='#result_anker' class='title_link'>&nbsp;</a></td>
+												<td class="Year"></td>
+												<td class="Type"></td>
+												<td class="imdbID"></td>
+											</tr>
+											<tr>
+												<td class="Title"><a href='#result_anker' class='title_link'>&nbsp;</a></td>
+												<td class="Year"></td>
+												<td class="Type"></td>
+												<td class="imdbID"></td>
+											</tr>
+											<tr>
+												<td class="Title"><a href='#result_anker' class='title_link'>&nbsp;</a></td>
+												<td class="Year"></td>
+												<td class="Type"></td>
+												<td class="imdbID"></td>
+											</tr>
+											<tr>
+												<td class="Title"><a href='#result_anker' class='title_link'>&nbsp;</a></td>
+												<td class="Year"></td>
+												<td class="Type"></td>
+												<td class="imdbID"></td>
+											</tr>
+											<tr>
+												<td class="Title"><a href='#result_anker' class='title_link'>&nbsp;</a></td>
+												<td class="Year"></td>
+												<td class="Type"></td>
+												<td class="imdbID"></td>
+											</tr>
+											<tr>
+												<td class="Title"><a href='#result_anker' class='title_link'>&nbsp;</a></td>
+												<td class="Year"></td>
+												<td class="Type"></td>
+												<td class="imdbID"></td>
+											</tr>
+											<tr>
+												<td class="Title"><a href='#result_anker' class='title_link'>&nbsp;</a></td>
+												<td class="Year"></td>
+												<td class="Type"></td>
+												<td class="imdbID"></td>
+											</tr>
+											<tr>
+												<td class="Title"><a href='#result_anker' class='title_link'>&nbsp;</a></td>
+												<td class="Year"></td>
+												<td class="Type"></td>
+												<td class="imdbID"></td>
+											</tr>
+											<tr>
+												<td class="Title"><a href='#result_anker' class='title_link'>&nbsp;</a></td>
+												<td class="Year"></td>
+												<td class="Type"></td>
+												<td class="imdbID"></td>
+											</tr>
+										</tbody>
+										<script>
+				    var view = {
+				      Enter Here: "Placeholder"
+				    };
+				    var out = Mustache.render("{{platzhalter}}",view, {});
+				    $(".search_result_table tr:nth-child(1n + 1) td a").html(out);
+					/* stop displaying the Type collume*/
+				$("table.search_result_table thead tr th:nth-child(3)").css("display", "none");
+					$("td .Type").css("display", "none");
+					
+					/* stop displaying the ImdbID collume*/	
+					$("table.search_result_table thead tr th:nth-child(4)").css("display", "none");
+					$("td .imdbID").css("display", "none");				
+				</script>
+									</table></td>
+							
+								<td><div class="grid_8 omega" id="detailed_film_info">
+									<table style="margin-bottom:0px;">
+										<tbody>
+											<tr>
+												<td><a id="detailed_film_info_poster_link" href=""> <img id="detailed_film_info_poster" src="" alt="Movie poster not found, sorry!" width="300" height="450" /></a></td>
+												<td id="detailed_film_info_info-td" ><h6> <span id="detailed_film_info_title"></span> </h6>
+													<p>(<span id="detailed_film_info_year"></span>) | <span id="detailed_film_info_type"></span> | <span id="detailed_film_info_runtime"></span></p>
+													<p><b>Rated:</b> <span id="detailed_film_info_rated"></span> - <b>Genre</b>(s)<b>:</b> <span id="detailed_film_info_genre"></span> </p>
+													<p><b>Released</b> <span id="detailed_film_info_released"></span> in cinemas, <span id="detailed_film_info_dvd"></span> on dvd - originally in <span id="detailed_film_info_language"></span></p>
+													<hr />
+													<p><b>Plot:</b></p>
+													<p><span id="detailed_film_info_plot"></span></p>
+													<hr />
+													<p><b>Actors:</b></p>
+													<p><span id="detailed_film_info_actors"></span></p>
+													<hr />
+													<table style="border:0px; padding:0px; border-spacing:0px;">
+														<tbody>
+															<tr>
+																<td><b>Metascore:</b></td>
+																<td><span id="detailed_film_info_metascore"></span></td>
+															</tr>
+															<tr>
+																<td><b>imdbRating:</b></td>
+																<td><span id="detailed_film_info_imdbrating"></span></td>
+															</tr>
+															<tr>
+																<td><b>tomatoRating:</b></td>
+																<td><span id="detailed_film_info_tomatorating"></span></td>
+															</tr>
+														</tbody>
+													</table>
+													<hr />
+													<p>Official website: <a id="detailed_film_info_website_link" href="" target="_blank"><span id="detailed_film_info_website"></span></a></p></td>
+											</tr>
+										</tbody>
+									</table>
+								</div></td>
+							</tr>
+						</tbody>
+					</table>
+					<div id="final_film_info" class="removeInFinalVersion2"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper grid_12" id="footer_wrapper">
+		<div class="grid_12 alpha">
+			<hr />
+			
+		</div>
+	</div>
+</div>
+</body>
+</html>

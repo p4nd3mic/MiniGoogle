@@ -1,0 +1,8 @@
+To run:
+run master and a worker servlet using servlet container.
+go to localhost:8080/status
+storage directory is set to ~/storage1
+job= edu.upenn.cis455.mapreduce.job.Init
+input= input
+output= interm1
+#threads= 3

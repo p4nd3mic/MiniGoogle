@@ -1,0 +1,50 @@
+first(-keyword-)
+<|>
+0.666(-IDF-)
+<|>
+
+(-First result-)
+http://www.usfirst.org/(-URL-)
+<:>
+USFIRST.org(-Title-)
+<:>
+0.520833(-TF-)
+<:>
+
+(-Positions-)
+(-First position-)
+0#112#1#2(-Hit info-)
+<&>
+...for us all. Founder Dean Kamen invites you to get behind FIRST, too. Read more about the FIRST Vision and Mission  FIRST kids are significantly more likely to attend college, major in science or engineering, and be outstanding future employees and citizens. FIRST is about changing our culture??? for the better. Join us in our quest to spread the word. ...(-Excerpt-)
+<;>
+(-Second position-)
+0#778#1
+<&>
+......(-Excerpt-)
+
+
+<*>
+(-Second result-)
+http://www.ardendertat.com/2011/07/17/how-to-implement-a-search-engine-part-3-ranking-tf-idf/(-URL-)
+<:>
+How to Implement a Search Engine Part 3: Ranking tf-idf | Arden DertatArden Dertat(-Title-)
+<:>
+0.516304(-TF-)
+<:>
+0#17#1<&>...Overview We have come to the third part of our implementing a search engine project, ranking. The first part was about creating the index, and the second part was querying the index. We basically have a search engine that can answer search queries on a given corpus, but ...
+<;>
+0#76#1<&>...corpus, but the results are not ranked.??Now, we will include ranking to obtain an ordered list of results, which is one of the most challenging and interesting parts. The first ranking scheme we will implement is tf-idf. In the following articles, we?ll analyze??Okapi BM25, which is a variant of tf-idf. We will also implement Google?s??PageRank. Then we will explore Machine Learning ...
+<;>
+0#185#1<&>...to be more important. It?s one of the most popular weighting schemes in Information Retrieval.  Term Frequency ? tf Let???s first define how term frequency is calculated for a term t in document d. It is basically the number of occurrences of the term in the document.  We can see that as a term appears more in the document ...
+<;>
+0#794#1<&>...mitigate this effect, we use inverse document frequency.??Let???s first see what document frequency is. The document frequency of a term t is the number of documents containing the term:  Note that the occurrence counts of the term in the individual documents is not important. We are only interested in whether the term is present in a document or not, without ...
+<;>
+0#1990#1<&>...will display the top 10 documents that match the query in the order of decreasing tf-idf scores. Enjoy..  The first too parts were explained in an easy way and with too much info to help for complete understanding, but this part is not, i hope you explain even the code or the files like testIndex.dat and titleIndex.dat ? Hi Arden ...
+<;>
+0#2032#1<&>...is not, i hope you explain even the code or the files like testIndex.dat and titleIndex.dat ? Hi Arden nice post again, can you give an example how can we apply machine learning algorithms quickly ? Hi Arden, Can you explain about the machine learning algorithms also(as in how can we implement them here), please? how do we perform phrase queries, ...
+
+
+
+Original Data:
+first<|>0.666<|>http://www.usfirst.org/<:>USFIRST.org<:>0.520833<:>0#112#1#2<&>...for us all. Founder Dean Kamen invites you to get behind FIRST, too. Read more about the FIRST Vision and Mission  FIRST kids are significantly more likely to attend college, major in science or engineering, and be outstanding future employees and citizens. FIRST is about changing our culture??? for the better. Join us in our quest to spread the word. ...<;>0#778#1<&>......<*>http://www.ardendertat.com/2011/07/17/how-to-implement-a-search-engine-part-3-ranking-tf-idf/<:>How to Implement a Search Engine Part 3: Ranking tf-idf | Arden DertatArden Dertat<:>0.516304<:>0#17#1<&>...Overview We have come to the third part of our implementing a search engine project, ranking. The first part was about creating the index, and the second part was querying the index. We basically have a search engine that can answer search queries on a given corpus, but ...<;>0#76#1<&>...corpus, but the results are not ranked.??Now, we will include ranking to obtain an ordered list of results, which is one of the most challenging and interesting parts. The first ranking scheme we will implement is tf-idf. In the following articles, we?ll analyze??Okapi BM25, which is a variant of tf-idf. We will also implement Google?s??PageRank. Then we will explore Machine Learning ...<;>0#185#1<&>...to be more important. It?s one of the most popular weighting schemes in Information Retrieval.  Term Frequency ? tf Let???s first define how term frequency is calculated for a term t in document d. It is basically the number of occurrences of the term in the document.  We can see that as a term appears more in the document ...<;>0#794#1<&>...mitigate this effect, we use inverse document frequency.??Let???s first see what document frequency is. The document frequency of a term t is the number of documents containing the term:  Note that the occurrence counts of the term in the individual documents is not important. We are only interested in whether the term is present in a document or not, without ...<;>0#1990#1<&>...will display the top 10 documents that match the query in the order of decreasing tf-idf scores. Enjoy..  The first too parts were explained in an easy way and with too much info to help for complete understanding, but this part is not, i hope you explain even the code or the files like testIndex.dat and titleIndex.dat ? Hi Arden ...<;>0#2032#1<&>...is not, i hope you explain even the code or the files like testIndex.dat and titleIndex.dat ? Hi Arden nice post again, can you give an example how can we apply machine learning algorithms quickly ? Hi Arden, Can you explain about the machine learning algorithms also(as in how can we implement them here), please? how do we perform phrase queries, ...
+

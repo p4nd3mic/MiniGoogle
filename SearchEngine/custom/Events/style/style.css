@@ -1,0 +1,135 @@
+body{
+		color: #333;
+		background:  #f2f2f2;
+	}
+	.info a {
+		color: #f2f2f2;
+	}
+	li{
+
+	list-style-type: none;
+	padding-left: 50px;
+	margin-bottom: 10px;
+	
+}
+.title{
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.filters{
+	text-align: center;
+}
+
+.search{
+	width: 20%;
+}
+
+span{
+	text-decoration: underline;
+}
+
+.images{
+	float: right;
+
+}
+
+.rb-grid {
+    list-style: none;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.rb-grid li {
+    width: 24%;
+    height: 15em;
+    margin: 0.5%;
+    background: #8CC7DF;
+    color: #fff;
+    display: block;
+    float: left;
+    padding: 1.6em;
+   
+    position: relative;
+}
+
+.rb-grid li:nth-child(3n+3){
+	width: 24%;
+}
+
+
+
+.rb-grid li:nth-child(1n+12) { background: #3399CC; }
+.rb-grid li:nth-child(2n+13) { background: #33CCCC; }
+.rb-grid li:nth-child(3n+14) { background: #996699; }
+.rb-grid li:nth-child(4n+15) { background: #C24747; }
+.rb-grid li:nth-child(5n+16) { background: #e2674a; }
+.rb-grid li:nth-child(1) { background: #3399CC; }
+.rb-grid li:nth-child(2) { background: #33CCCC; }
+.rb-grid li:nth-child(3) { background: #996699; }
+.rb-grid li:nth-child(4) { background: #C24747; }
+.rb-grid li:nth-child(5) { background: #e2674a; }
+.rb-grid li:nth-child(6) { background: #FFCC66; }
+.rb-grid li:nth-child(7) { background: #99CC99; }
+.rb-grid li:nth-child(8) { background: #669999; }
+.rb-grid li:nth-child(9) { background: #CC6699; }
+.rb-grid li:nth-child(10) { background: #339966; }
+.rb-grid li:nth-child(11) { background: #666699; }
+  
+.inputinfo {
+padding-top: 2em;
+}
+
+#loading {
+
+	width: 30px;
+	height: 30px;
+	border: 8px solid #333;
+	border-right-color: transparent;
+	border-radius: 50%;
+	box-shadow: 0 0 25px 2px #eee;
+	  margin-left: auto ;
+  margin-right: auto ;
+	-webkit-animation: spin 1s linear infinite;
+	-moz-animation: spin 1s linear infinite;
+	-ms-animation: spin 1s linear infinite;
+	-o-animation: spin 1s linear infinite;
+	animation: spin 1s linear infinite;
+
+}
+
+
+@-webkit-keyframes spin
+{
+	from { -webkit-transform: rotate(0deg); opacity: 0.4; }
+	50%  { -webkit-transform: rotate(180deg); opacity: 1; }
+	to   { -webkit-transform: rotate(360deg); opacity: 0.4; }
+}
+
+@-moz-keyframes spin
+{
+	from { -moz-transform: rotate(0deg); opacity: 0.4; }
+	50%  { -moz-transform: rotate(180deg); opacity: 1; }
+	to   { -moz-transform: rotate(360deg); opacity: 0.4; }
+}
+
+@-ms-keyframes spin
+{
+	from { -ms-transform: rotate(0deg); opacity: 0.4; }
+	50%  { -ms-transform: rotate(180deg); opacity: 1; }
+	to   { -ms-transform: rotate(360deg); opacity: 0.4; }
+}
+
+@-o-keyframes spin
+{
+	from { -o-transform: rotate(0deg); opacity: 0.4; }
+	50%  { -o-transform: rotate(180deg); opacity: 1; }
+	to   { -o-transform: rotate(360deg); opacity: 0.4; }
+}
+
+@keyframes spin
+{
+	from { transform: rotate(0deg); opacity: 0.2; }
+	50%  { transform: rotate(180deg); opacity: 1; }
+	to   { transform: rotate(360deg); opacity: 0.2; }
+}
