@@ -16,7 +16,6 @@ public class Iter extends MapReduceBase implements Mapper, Reducer {
 
 		String val = value.toString();
 		// separate key and value
-		//String[] keyVal = val.split("\\t");
 
 			// emit the intial key value and the word original which will be
 			// used to parse in reducer.
@@ -38,14 +37,10 @@ public class Iter extends MapReduceBase implements Mapper, Reducer {
 					// for each friend vertex calculate formula and emit to
 					// reducer.
 					formula = (1 / count) * rank;
-					String formulaString = "";
+					String formulaString = String.valueOf(formula);;
 					for (int i = 0; i < vertices.length - 2; i++) {
-						formulaString = String.valueOf(formula);
 						// emit vertex and partial rank formula
-//						System.out.println("writing in mapper");
-//						System.out.println(vertices[i]+"   "+ formulaString);
 						context.write(vertices[i], formulaString);
-						//System.out.println(vertices[i]+"   form="+formulaString);
 					}
 				} catch (Exception e) {
 					System.out.println("NumberFormatException111");
@@ -56,9 +51,6 @@ public class Iter extends MapReduceBase implements Mapper, Reducer {
 
 	public void reduce(String key, String[] values, Context context) {
 		String edge = "";
-
-
-		
 		// used to count number of friends
 
 		String strValue = "";
@@ -66,8 +58,6 @@ public class Iter extends MapReduceBase implements Mapper, Reducer {
 		Double summation = 0.0;
 
 		for (String value : values) {
-//			System.out.println("entering reduce");
-//			System.out.println("key="+key+"  v:"+value);
 			strValue = value.toString();
 			// check if this is the intermediate format. v -> v1,..vn,rank=,count=
 			if (strValue.startsWith("original=")) {
