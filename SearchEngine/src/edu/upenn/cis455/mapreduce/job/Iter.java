@@ -37,9 +37,10 @@ public class Iter extends MapReduceBase implements Mapper, Reducer {
 					Double count = Double.parseDouble(m.group(2));
 					// for each friend vertex calculate formula and emit to
 					// reducer.
+					formula = (1 / count) * rank;
+					String formulaString = "";
 					for (int i = 0; i < vertices.length - 2; i++) {
-						formula = (1 / count) * rank;
-						String formulaString = String.valueOf(formula);
+						formulaString = String.valueOf(formula);
 						// emit vertex and partial rank formula
 //						System.out.println("writing in mapper");
 //						System.out.println(vertices[i]+"   "+ formulaString);
